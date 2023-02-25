@@ -14,12 +14,15 @@ export default function Board({
 	onPlay: (nextSquares: string[]) => void;
 }) {
 	const winner = calculateWinner(squares);
-	const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? "X" : "O"}`;
+	const X = "🤗";
+	const O = "😚";
+
+	const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? X : O}`;
 
 	function handleClick(i: number) {
 		if (squares[i] || calculateWinner(squares)) return;
 		const nextSquares = [...squares];
-		xIsNext ? (nextSquares[i] = "X") : (nextSquares[i] = "O");
+		xIsNext ? (nextSquares[i] = X) : (nextSquares[i] = O);
 		onPlay(nextSquares);
 	}
 
