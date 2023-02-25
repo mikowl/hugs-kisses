@@ -4,21 +4,23 @@ import Square from "./Square";
 
 const SQUARE_AMOUNT = 9;
 
-export default function Board() {
-	const [xIsNext, setXIsNext] = useState(true);
-	const [squares, setSquares] = useState<string[]>(Array(SQUARE_AMOUNT).fill(null));
-
+export default function Board({
+	xIsNext,
+	squares,
+	onPlay,
+}: {
+	xIsNext: boolean;
+	squares: string[];
+	onPlay: (nextSquares: string[]) => void;
+}) {
 	const winner = calculateWinner(squares);
 	const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? "X" : "O"}`;
+
 	function handleClick(i: number) {
 		if (squares[i] || calculateWinner(squares)) return;
-
 		const nextSquares = [...squares];
-		console.log(squares, nextSquares);
-		if (squares[i]) return;
 		xIsNext ? (nextSquares[i] = "X") : (nextSquares[i] = "O");
-		setSquares(nextSquares);
-		setXIsNext(!xIsNext);
+		onPlay(nextSquares);
 	}
 
 	return (
