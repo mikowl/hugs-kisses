@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { range, calculateWinner } from "../utils";
+import { Fireworks } from "@fireworks-js/react";
 import Square from "./Square";
 
 const SQUARE_AMOUNT = 9;
@@ -17,7 +17,13 @@ export default function Board({
 	const X = "🤗";
 	const O = "😚";
 
-	const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? X : O}`;
+	const status = winner ? (
+		<p>The winner is {winner}</p>
+	) : (
+		<p>
+			Next player: <i>{xIsNext ? X : O}</i>
+		</p>
+	);
 
 	function handleClick(i: number) {
 		if (squares[i] || calculateWinner(squares)) return;
@@ -33,7 +39,18 @@ export default function Board({
 					<Square key={i + 1} value={squares[i]} onSquareClick={() => handleClick(i)} />
 				))}
 			</div>
-			<div className="status">{status}</div>
+			<div className={`status${winner ? " gameover" : ""}`}>{status}</div>
+			{winner && (
+				<Fireworks
+					options={{
+						rocketsPoint: {
+							min: 0,
+							max: 100,
+						},
+					}}
+					className="fireworks"
+				/>
+			)}
 		</>
 	);
 }

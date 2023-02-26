@@ -1,11 +1,12 @@
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
 
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
-	background-color: #361830;
+	background: linear-gradient(180deg, rgba(13,9,79,0.6) 0%, rgba(9,9,121,0.6) 50%, rgba(52,78,166,0.6) 100%);
+
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -20,7 +21,6 @@
 	padding: 2rem;
 	text-align: center;
 }
-
 
 a {
 	font-weight: 500;
@@ -47,7 +47,7 @@ h1 {
 
 .game {
 	display: grid;
-	grid-template-columns: 65% 35%;
+	grid-template-columns: 1fr;
 	grid-gap: 1.25rem;
 }
 
@@ -85,28 +85,49 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
+	outline: 3px auto -webkit-focus-ring-color;
 }
 
 .status {
 	font-size: 1.25rem;
 	font-weight: 500;
-	margin-top: 2rem;
+	margin-top: 1rem;
+	background: transparent; 
+	transition: background 0.25s, font-size 0.25s;
+}
+.status i {
+	display: inline-block;
+	font-size: 3rem;
+	transform: translate(10px, 10px);
+}
+.status p {
+	margin: 0;
+}
+.status.gameover {
+	font-size: 10vw;
+	position: absolute;
+	top: 33%;
+	background: #219e69;
+	padding: 10px 0;
+	left: 0;
+	right: 0;
 }
 
 .game-info {
 	background: rgba(255, 255, 255, 0.05);
 	border-radius: 5px;
 	padding: 0 10px;
+	height: auto;
 }
 
 .game-info h3 {
 	font-size: 1.125rem;
-	font-weight: 400;
+	font-weight: 600;
 	margin: 0 -10px;
 	padding: 5px 0;
 	border-radius: 5px 5px 0 0;
-	background: rgba(255, 166, 59, 0.2);
+	color: #12184b;
+	background: #e8c34b;
 }
 
 .game-info button {
@@ -119,19 +140,26 @@ button:focus-visible {
 .game-info ol {
 	font-size: 0.9375rem;
 	padding: 0;
-	margin: 10px 0 0 25px;
+	margin: 10px 0 12px 25px;
 	line-height: 2;
 }
 
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
+.fireworks {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 999;
+}
+
+@media screen and (min-width: 600px) {
+	.game {
+		grid-template-columns: 65% 35%;
 	}
-	a:hover {
-		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
+	.game-info {
+		height: calc(100% - 86px);
 	}
 }
+	

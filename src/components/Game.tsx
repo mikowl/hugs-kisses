@@ -1,7 +1,6 @@
 import { SetStateAction, useState } from "react";
+import { calculateWinner } from "../utils";
 import Board from "./Board";
-
-const SQUARE_AMOUNT = 9;
 
 export default function Game() {
 	const [history, setHistory] = useState([Array(9).fill(null)]);
@@ -19,7 +18,9 @@ export default function Game() {
 		setCurrentMove(nextMove);
 	}
 
-	const moves = history.map((squares, move) => {
+	const winner = calculateWinner(currentSquares);
+
+	const moves = history.map((squares, move: number) => {
 		const desc = move ? `Go to move #${move}` : `Go to game start`;
 		return (
 			<li key={move}>
@@ -33,6 +34,7 @@ export default function Game() {
 			<div className="game-board">
 				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
 			</div>
+			{winner && <button onClick={() => jumpTo(0)}>New Game?</button>}
 			<div className="game-info">
 				<h3>History</h3>
 				<ol>{moves}</ol>
