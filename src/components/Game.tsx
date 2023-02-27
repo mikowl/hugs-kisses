@@ -34,7 +34,11 @@ export default function Game() {
 			<div className="game-board">
 				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
 			</div>
-			{winner && <button onClick={() => jumpTo(0)}>New Game?</button>}
+			{winner && (
+				<p className="restart">
+					<button onClick={() => jumpTo(0)}>New Game?</button>
+				</p>
+			)}
 			<div className="game-info">
 				<h3>History</h3>
 				<ol>{moves}</ol>

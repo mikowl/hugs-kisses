@@ -45,6 +45,10 @@ h1 {
 	line-height: 1.1;
 }
 
+.game-board {
+	position: relative;
+}
+
 .game {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -104,13 +108,32 @@ button:focus-visible {
 	margin: 0;
 }
 .status.gameover {
-	font-size: 10vw;
-	position: absolute;
+	position: fixed;
+	font-size: 9vw;
+	font-weight: 700;
+	text-transform: uppercase;
 	top: 33%;
 	background: #219e69;
 	padding: 10px 0;
 	left: 0;
 	right: 0;
+}
+
+.restart {
+	position: absolute; 
+	top: 50%;
+  left: 0; 
+  right: 0; 
+	margin: 0 auto;
+	width: 100%;
+}
+
+.restart button {
+	font-size: 1.25rem;
+	font-weight: 500;
+	padding: 0.5em 1em;
+	background: #3440aa;
+	border: 3px solid #FFF;
 }
 
 .game-info {
